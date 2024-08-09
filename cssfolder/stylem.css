@@ -13,10 +13,6 @@ p{
     font-size: 1.2em;
 }
 
-* {
-    box-sizing: border-box;
-}
-
 li {
     color: rgb(210, 210, 210);
     font-size: 1.1em;
@@ -44,8 +40,8 @@ li {
     width: 65%;
  }
 
- div.gallery {
-    margin: 15px;
+div.gallery {
+    border: 1px;
   }
   
   div.gallery:hover {
@@ -60,33 +56,20 @@ li {
   }
   
   div.desc {
-    padding: 5px;
+    padding: 10px;
     text-align: center;
     font-size: 1.1em;
     color: rgb(210, 210, 210);
   }
-  
+
   * {
     box-sizing: border-box;
-  }
-  
-  .responsive {
-    padding: 0 6px;
-    float: left;
-    width: 20%;
-  }
-
-  .clearfix:after {
-    content: "";
-    display: table;
-    clear: both;
 }
   
- /* Clear floats after the columns */
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
+.responsive {
+  padding: 0 6px;
+  float: left;
+  width: 20%;
 }
 
 @media only screen and (max-width: 850px) {
@@ -125,4 +108,18 @@ li {
 
 footer {
     margin-top: 30px;
+}
+
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+ /* Clear floats after the columns */
+ .row:after {
+  content: "";
+  display: table;
+  clear: both;
 }

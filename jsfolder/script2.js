@@ -18,7 +18,7 @@ const APIController = (function() {
             "Coruscant": data2.planets[2],
             "Kamino": data2.planets[3],
             "Geonosis": data2.planets[4]
-        }
+        };
 
         return [data2, planets];
     }
@@ -32,10 +32,10 @@ const APIController = (function() {
 
             const data = await result.json();
             const data2 = data.result.properties;
-            allplanets.push(data2)
+            allplanets.push(data2);
         }
   
-        return allplanets
+        return allplanets;
     }
 
     const _getPlanet = async (link) => {
@@ -60,7 +60,7 @@ const APIController = (function() {
         },
 
         getPlanet(link) {
-            return _getPlanet(link)
+            return _getPlanet(link);
         }
     }
 
@@ -79,10 +79,8 @@ const UIController = (function() {
         // Method to get input fields
         inputField() {
             return {
-                title: document.querySelector(DOMElements.header),
-                filmfacts: document.querySelector(DOMElements.leftcol),
                 planetlist: document.querySelector(DOMElements.rightcol)
-            }
+            };
         },
 
         // Method to add title and column headers
@@ -99,8 +97,8 @@ const UIController = (function() {
 
             document.querySelector(DOMElements.list).insertAdjacentHTML('beforeend', item1);
 
-            const item2 = "<p style='color: rgb(210,210,210); font-size: 1.05em'>" + crawl + "</p>"
-            document.querySelector(DOMElements.leftcol).insertAdjacentHTML('beforeend', item2)
+            const item2 = "<p style='color: rgb(210,210,210); font-size: 1.05em'>" + crawl + "</p>";
+            document.querySelector(DOMElements.leftcol).insertAdjacentHTML('beforeend', item2);
         },
 
         // Method to display planets in gallery view
@@ -113,7 +111,6 @@ const UIController = (function() {
                 </div>
             </div>
             `;
-//                    <img src="images/${planet_name}.png" alt="${planet_name}">
 
             document.querySelector(DOMElements.rightcol).insertAdjacentHTML('beforeend', item1);
         }
@@ -130,9 +127,8 @@ const APPController = (function(UIctrl, APICtrl) {
         // Get film facts
         var movie = await APICtrl.getMovie();
 
-        const filmfacts = movie[0]
-        const planets = movie[1]
-        // const planets = filmfacts.planets;
+        const filmfacts = movie[0];
+        const planets = movie[1];
 
         // Populate left column with film facts
         UIctrl.createHeaders(filmfacts.episode_id, filmfacts.title);
@@ -143,25 +139,21 @@ const APPController = (function(UIctrl, APICtrl) {
         Object.keys(planets).forEach(planet => {
             UIctrl.createPlanetList(planet)
             if (fix_control%5 == 0) {
-                html = "<div class='clearfix'></div>"
-                DOMInputs.planetlist.insertAdjacentHTML('beforeend', html)
+                html = "<div class='clearfix'></div>";
+                DOMInputs.planetlist.insertAdjacentHTML('beforeend', html);
             }
             fix_control +=1
         })
 
-        html = "<div class='clearfix'></div>"
-        DOMInputs.planetlist.insertAdjacentHTML('beforeend', html)
-        // var allplanetfacts = await APICtrl.getPlanets(planets)
-        // allplanetfacts.forEach(element => {
-        //     UIctrl.createPlanetList(element.name)
-        // })
+        html = "<div class='clearfix'></div>";
+        DOMInputs.planetlist.insertAdjacentHTML('beforeend', html);
         
         // Display planet facts on click
     }
 
     return {
         init() {
-            console.log('App is starting!')
+            console.log('App is starting!');
             loadFilmFacts();
         }
     }
