@@ -8,6 +8,11 @@ h1{
     font-size: 2.5em;
 }
 
+h2{
+    color: rgb(210, 210, 210);
+    text-align: center;
+}
+
 p{
     color: rgba(255, 255, 0, 0.851);
     font-size: 1.2em;
@@ -38,63 +43,75 @@ li {
   
 .right {
     width: 65%;
- }
+}
 
 div.gallery {
     border: 1px;
-  }
+}
   
-  div.gallery:hover {
+div.gallery:hover {
     border: 1px solid #ffffff;
     border-radius: 30px;
-  }
-  
-  div.gallery img {
+}
+
+td {
+    width: 40%;
+    padding: 15px;
+}
+
+table {
+    border: 2px solid #ffffff;
+    border-radius: 30px;
+    margin: 20px;
+}
+
+img {
     width: 100%;
     height: auto;
     border-radius: 30px;
-  }
+}
   
-  div.desc {
+div.desc {
     padding: 10px;
     text-align: center;
     font-size: 1.1em;
     color: rgb(210, 210, 210);
-  }
+}
 
-  * {
+
+* {
     box-sizing: border-box;
 }
   
 .responsive {
-  padding: 0 6px;
-  float: left;
-  width: 20%;
+    padding: 0 6px;
+    float: left;
+    width: 20%;
 }
 
 @media only screen and (max-width: 850px) {
     .responsive {
-      width: 49.99999%;
-      margin: 30px 0;
+        width: 49.99999%;
+        margin: 30px 0;
     }
 
     .left {
-      width: 90%;
-      margin-bottom: 25px;
+        width: 90%;
+        margin-bottom: 25px;
    }
     
     .right {
-      width: 90%;
-     }
+        width: 90%;
+    }
 }
   
 @media only screen and (max-width: 500px) {
     .responsive {
-      width: 100%;
+        width: 100%;
     }
 
     .column {
-      margin-left: 20px;
+        margin-left: 20px;
     }
     .left {
         width: 90%;
@@ -112,14 +129,14 @@ footer {
 
 
 .clearfix:after {
-  content: "";
-  display: table;
-  clear: both;
+    content: "";
+    display: table;
+    clear: both;
 }
 
  /* Clear floats after the columns */
  .row:after {
-  content: "";
-  display: table;
-  clear: both;
+    content: "";
+    display: table;
+    clear: both;
 }
