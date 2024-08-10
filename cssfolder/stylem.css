@@ -3,6 +3,10 @@ html {
     text-align: center;
 }
 
+a {
+    color: yellow;
+}
+
 h1{
     color: yellow;
     font-size: 2.5em;

@@ -2,13 +2,16 @@ html {
     background-color: black;
     text-align: center;
 }
-
+a {
+    color: yellow;
+}
 h1{
     color: yellow;
 }
 
 p{
     color: yellow;
+    font-size: 1.1em;
 }
 
 div.gallery {

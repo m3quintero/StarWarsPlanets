@@ -5,32 +5,38 @@ const APIController = (function() {
 
     // Build private methods
     const _getMovie = async () => {
-        
-        // Fetch the movie data and planets featured
-        const result = await fetch("https://www.swapi.tech/api/films/4");
+        try {
+            // Fetch the movie data and planets featured
+            const result = await fetch("https://www.swapi.tech/api/films/4");
 
-        const data = await result.json();
-        const data2 = data.result.properties;
+            const data = await result.json();
+            const data2 = data.result.properties;
 
-        const planets = {
-            "Tatooine": data2.planets[0],
-            "Naboo": data2.planets[1],
-            "Coruscant": data2.planets[2]
-        };
+            const planets = {
+                "Tatooine": data2.planets[0],
+                "Naboo": data2.planets[1],
+                "Coruscant": data2.planets[2]
+            };
 
-        return [data2, planets];
+            return [data2, planets];
+        } catch (error) {
+            console.log("There was an error attempting to fetch the movie data.");
+        }
     }
 
     // Fetch the planet data for chosen planet
     const _getPlanet = async (link) => {
-        
-        // Fetch the planet data
-        const result = await fetch(link);
+        try {
+            // Fetch the planet data
+            const result = await fetch(link);
 
-        const data = await result.json();
-        const data2 = data.result.properties;
+            const data = await result.json();
+            const data2 = data.result.properties;
 
-        return data2;
+            return data2;
+        } catch (error) {
+            console.log("There was an error attempting to fetch the planet data.");
+        }
     }
 
     // Return public methods

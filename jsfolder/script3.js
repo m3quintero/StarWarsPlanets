@@ -5,42 +5,48 @@ const APIController = (function() {
 
     // Build private methods
     const _getMovie = async () => {
-        
-        // Fetch the movie data and planets featured
-        const result = await fetch("https://www.swapi.tech/api/films/6");
+        try {
+            // Fetch the movie data and planets featured
+            const result = await fetch("https://www.swapi.tech/api/films/6");
 
-        const data = await result.json();
-        const data2 = data.result.properties;
+            const data = await result.json();
+            const data2 = data.result.properties;
 
-        const planets = {
-            "Tatooine": data2.planets[0],
-            "Alderaan": data2.planets[1],
-            "Dagobah": data2.planets[2],
-            "Naboo": data2.planets[3],
-            "Coruscant": data2.planets[4],
-            "Utapau": data2.planets[5],
-            "Mustafar": data2.planets[6],
-            "Kashyyyk": data2.planets[7],
-            "Polis Massa": data2.planets[8],
-            "Mygeeto": data2.planets[9],
-            "Felucia": data2.planets[10],
-            "Cato Neimoidia": data2.planets[11],
-            "Saleucami": data2.planets[12]
-        };
+            const planets = {
+                "Tatooine": data2.planets[0],
+                "Alderaan": data2.planets[1],
+                "Dagobah": data2.planets[2],
+                "Naboo": data2.planets[3],
+                "Coruscant": data2.planets[4],
+                "Utapau": data2.planets[5],
+                "Mustafar": data2.planets[6],
+                "Kashyyyk": data2.planets[7],
+                "Polis Massa": data2.planets[8],
+                "Mygeeto": data2.planets[9],
+                "Felucia": data2.planets[10],
+                "Cato Neimoidia": data2.planets[11],
+                "Saleucami": data2.planets[12]
+            };
 
-        return [data2, planets];
+            return [data2, planets];
+        } catch (error) {
+            console.log("There was an error attempting to fetch the movie data.")
+        }
     }
 
     // Fetch the planet data for chosen planet
     const _getPlanet = async (link) => {
-        
-        // Fetch the planet data
-        const result = await fetch(link);
+        try {
+            // Fetch the planet data
+            const result = await fetch(link);
 
-        const data = await result.json();
-        const data2 = data.result.properties;
+            const data = await result.json();
+            const data2 = data.result.properties;
 
-        return data2;
+            return data2;
+        } catch (error) {
+            console.log("There was an error attempting to fetch the planet data.")
+        }
     }
 
     // Return public methods
