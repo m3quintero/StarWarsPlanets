@@ -1,7 +1,7 @@
 # Star Wars Planets
 
-## The following website uses 
+## The following website makes use of the SWAPI (Star Wars API) to display information about the prequel movies and the planets that are featured in those movies.
 
-### The app looks best on a laptop or desktop computer
+### Image sources can be found below:
 
-### The images 
+###
