@@ -23,21 +23,7 @@ const APIController = (function() {
         return [data2, planets];
     }
 
-    // Fetch the planet data for each planet that appears in the movie
-    const _getPlanets = async (planetlinks) => {
-        var allplanets = []
-
-        for (const property in planetlinks) {
-            const result = await fetch(planetlinks[property]);
-
-            const data = await result.json();
-            const data2 = data.result.properties;
-            allplanets.push(data2);
-        }
-  
-        return allplanets;
-    }
-
+    // Fetch the planet data for chosen planet
     const _getPlanet = async (link) => {
         
         // Fetch the planet data
@@ -55,10 +41,6 @@ const APIController = (function() {
             return _getMovie();
         },
 
-        getPlanets(planetlinks) {
-            return _getPlanets(planetlinks);
-        },
-
         getPlanet(link) {
             return _getPlanet(link);
         }
@@ -72,14 +54,18 @@ const UIController = (function() {
         header: 'header',
         leftcol: '.left',
         rightcol: '.right',
-        list: 'ul'
-    }
+        list: 'ul',
+        coltop: '#coltop',
+        colbottom: '#colbottom',
+    };
 
     return {
         // Method to get input fields
         inputField() {
             return {
-                planetlist: document.querySelector(DOMElements.rightcol)
+                rightcol: document.querySelector(DOMElements.rightcol),
+                planetlist: document.querySelector(DOMElements.coltop),
+                planetinfo: document.querySelector(DOMElements.colbottom)
             };
         },
 
@@ -106,13 +92,44 @@ const UIController = (function() {
             const item1 = 
             `
             <div class="responsive">
-                <div class="gallery">
+                <div id="${planet_name}" class="gallery">
                     <div class="desc">${planet_name}</div>
                 </div>
             </div>
             `;
 
-            document.querySelector(DOMElements.rightcol).insertAdjacentHTML('beforeend', item1);
+            document.querySelector(DOMElements.coltop).insertAdjacentHTML('beforeend', item1);
+        },
+
+        // Method to display specific planet data
+        createPlanetInfo(planet_name, population, terrain, climate, daylength, yearlength) {
+            var item1 = `<li>Population: ${population}</li>`;
+            item1+= `<li>Terrain: ${terrain}</li>`;
+            item1+= `<li>Climate: ${climate}</li>`;
+            item1 += `<li>Rotational Period: ${daylength}</li>`;
+            item1+= `<li>Orbital Period: ${yearlength}</li>`;
+
+            const info = 
+            `
+            <table>
+                <tr>
+                    <td id="planet_img">
+                        <img src="images/${planet_name}.png" alt="The planet ${planet_name}">
+                    </td>
+                    <td id="planet_facts">
+                        <h2>${planet_name}</h3>
+                        <ul>${item1}</ul>
+                    </td>
+                </tr>
+            </table>
+            `;
+
+            document.querySelector(DOMElements.colbottom).insertAdjacentHTML('beforeend', info)
+        },
+
+        // Method to reset planet data
+        resetPlanetInfo() {
+            this.inputField().planetinfo.innerHTML = "";
         }
     }
 })();
@@ -142,13 +159,29 @@ const APPController = (function(UIctrl, APICtrl) {
                 html = "<div class='clearfix'></div>";
                 DOMInputs.planetlist.insertAdjacentHTML('beforeend', html);
             }
-            fix_control +=1
+            fix_control +=1;
         })
 
         html = "<div class='clearfix'></div>";
         DOMInputs.planetlist.insertAdjacentHTML('beforeend', html);
-        
-        // Display planet facts on click
+
+        // Planet change event listener
+        Object.keys(planets).forEach(planet => {
+            document.getElementById(planet).addEventListener('click', async (event) => {
+
+                // prevent page reset
+                event.preventDefault();
+
+                // Clear planet info displayed
+                UIctrl.resetPlanetInfo();
+
+                // Fetch planet facts
+                const facts = await APICtrl.getPlanet(planets[planet]);
+
+                // Display planet facts
+                UIctrl.createPlanetInfo(facts.name, facts.population, facts.terrain, facts.climate, facts.rotation_period, facts.orbital_period);
+            }) 
+        })
     }
 
     return {
