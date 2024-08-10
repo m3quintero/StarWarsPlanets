@@ -21,20 +21,6 @@ const APIController = (function() {
         return [data2, planets];
     }
 
-    // const _getPlanets = async (planetlinks) => {
-    //     var allplanets = [];
-
-    //     for (const property in planetlinks) {
-    //         const result = await fetch(planetlinks[property]);
-
-    //         const data = await result.json();
-    //         const data2 = data.result.properties;
-    //         allplanets.push(data2);
-    //     }
-  
-    //     return allplanets;
-    // }
-
     // Fetch the planet data for chosen planet
     const _getPlanet = async (link) => {
         
@@ -52,10 +38,6 @@ const APIController = (function() {
         getMovie() {
             return _getMovie();
         },
-
-        // getPlanets(planetlinks) {
-        //     return _getPlanets(planetlinks);
-        // },
 
         getPlanet(link) {
             return _getPlanet(link);
@@ -118,7 +100,13 @@ const UIController = (function() {
         },
 
         // Method to display specific planet data
-        createPlanetImg(planet_name) {
+        createPlanetInfo(planet_name, population, terrain, climate, daylength, yearlength) {
+            var item1 = `<li>Population: ${population}</li>`;
+            item1+= `<li>Terrain: ${terrain}</li>`;
+            item1+= `<li>Climate: ${climate}</li>`;
+            item1 += `<li>Rotational Period: ${daylength}</li>`;
+            item1+= `<li>Orbital Period: ${yearlength}</li>`;
+
             const info = 
             `
             <table>
@@ -128,17 +116,13 @@ const UIController = (function() {
                     </td>
                     <td id="planet_facts">
                         <h2>${planet_name}</h3>
-                        <ul></ul>
+                        <ul>${item1}</ul>
                     </td>
                 </tr>
             </table>
             `;
 
             document.querySelector(DOMElements.colbottom).insertAdjacentHTML('beforeend', info)
-        },
-
-        createPlanetInfo(name, population, terrain, climate, daylength, yearlength) {
-            //something
         },
 
         // Method to reset planet data
@@ -182,22 +166,20 @@ const APPController = (function(UIctrl, APICtrl) {
         // Planet change event listener
         Object.keys(planets).forEach(planet => {
             document.getElementById(planet).addEventListener('click', async (event) => {
-                console.log("Executed!")
+
                 // prevent page reset
                 event.preventDefault();
 
                 // Clear planet info displayed
                 UIctrl.resetPlanetInfo();
 
-                // Display new planet image and name
-                UIctrl.createPlanetImg(planet);
+                // Fetch planet facts
+                const facts = await APICtrl.getPlanet(planets[planet]);
 
-                // Display planet fun facts
-            })
+                // Display planet facts
+                UIctrl.createPlanetInfo(facts.name, facts.population, facts.terrain, facts.climate, facts.rotation_period, facts.orbital_period);
+            }) 
         })
-
-        // Display planet facts on click
-
     }
 
     return {
