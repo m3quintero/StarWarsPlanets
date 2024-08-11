@@ -5,7 +5,7 @@
 ## You can access the website by going to:
 
 ## https://m3quintero.github.io/StarWarsPlanets/
-# ______________________________________________________
+# _____________________________________________
 ##### Image sources can be found below:
 
 ##### Alderaan: https://static.wikia.nocookie.net/starwars/images/e/e9/AlderaanSystem-TCWAssassin.png/revision/latest/scale-to-width-down/1000?cb=20130513020535 
