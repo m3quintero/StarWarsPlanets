@@ -1,5 +1,17 @@
 // Code used to obtain the names of all the featured planets
-
+// fetch("https://www.swapi.tech/api/films/6")
+// .then(res => res.json())
+// .then(data => {
+//     planets = data.result.properties.planets
+//     var planet_dict = {}
+//     for (const item of planets) {
+//         fetch(item).then(res => res.json()).then(data => {
+//             planet_dict[data.result.properties.name] = data.result.properties.url
+//             console.log(planet_dict)
+//         })
+//     }
+//     console.log(planet_dict)
+// }).catch(err => console.error(err))
 
 const APIController = (function() {
 
